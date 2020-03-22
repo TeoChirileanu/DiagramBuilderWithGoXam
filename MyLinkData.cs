@@ -4,5 +4,5 @@ using Northwoods.GoXam.Model;
 namespace GoXam
 {
     [Serializable]
-    public class MyLinkData : GraphLinksModelLinkData<Guid, Guid> { }
+    public class MyLinkData : GraphLinksModelLinkData<string, string> { }
 }
