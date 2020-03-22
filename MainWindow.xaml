@@ -9,10 +9,27 @@
 
     <FrameworkElement.Resources>
         <DataTemplate x:Key="MyNodeTemplate">
-            <Border Background="Aqua"
-                go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}">
-                <TextBlock Text="{Binding Path=Data.Key, Mode=TwoWay}" />
-            </Border>
+            <StackPanel go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}">
+                <TextBlock Text="{Binding Path=Data.Key, Mode=TwoWay}"
+                           HorizontalAlignment="Center"
+                           go:Part.TextEditable="True"/>
+                <Grid HorizontalAlignment="Center">
+                    <Rectangle Fill="Brown"
+                             Width="30" Height="30"
+                             go:Node.PortId=""
+                             go:Node.LinkableFrom="True" 
+                             go:Node.LinkableTo="True"
+                             Cursor="Hand" />
+                </Grid>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="MyLinkTemplate">
+            <go:LinkPanel go:Part.SelectionElementName="Path" go:Part.SelectionAdorned="True">
+                <go:LinkShape 
+                    Stroke="Black" StrokeThickness="2"
+                    x:Name="Path" go:LinkPanel.IsLinkShape="True"/>
+                <Path Fill="Black" go:LinkPanel.ToArrow="Standard"/>
+            </go:LinkPanel>
         </DataTemplate>
     </FrameworkElement.Resources>
 
@@ -33,7 +50,8 @@
             InitialDiagramBoundsSpot="Center"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
-            NodeTemplate="{StaticResource MyNodeTemplate}">
+            NodeTemplate="{StaticResource MyNodeTemplate}"
+            LinkTemplate="{StaticResource MyLinkTemplate}">
         </go:Diagram>
     </Grid>
 </Window>
