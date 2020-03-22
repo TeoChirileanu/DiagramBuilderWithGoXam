@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Northwoods.GoWPF" Version="3.0.1" />
+  </ItemGroup>
+
 </Project>
