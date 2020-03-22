@@ -18,10 +18,20 @@
     </FrameworkElement.Resources>
 
     <Grid>
+        <go:Palette 
+            x:Name="MyPalette"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Top"
+            NodeTemplate="{StaticResource MyNodeTemplate}">
+        </go:Palette>
+
         <go:Diagram 
             x:Name="MyDiagram"
+            InitialPanelSpot="Center"
+            InitialDiagramBoundsSpot="Center"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
+            AllowDrop="True"
             NodeTemplate="{StaticResource MyNodeTemplate}"/>
     </Grid>
 </Window>
