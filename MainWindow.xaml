@@ -9,28 +9,31 @@
 
     <FrameworkElement.Resources>
         <DataTemplate x:Key="MyNodeTemplate">
-            <Border
-                Background="Aqua"
+            <Border Background="Aqua"
                 go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}">
-                <TextBlock Text="{Binding Path=Data.Key}" />
+                <TextBlock Text="{Binding Path=Data.Key, Mode=TwoWay}" />
             </Border>
         </DataTemplate>
     </FrameworkElement.Resources>
 
     <Grid>
-        <go:Palette
-            x:Name="MyPalette"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+
+        <go:Palette Grid.Row="0" Grid.Column="0" x:Name="MyPalette"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Top"
-            NodeTemplate="{StaticResource MyNodeTemplate}" />
+            NodeTemplate="{StaticResource MyNodeTemplate}">
+        </go:Palette>
 
-        <go:Diagram
-            x:Name="MyDiagram"
+        <go:Diagram Grid.Row="0" Grid.Column="1" x:Name="MyDiagram" AllowDrop="True"
             InitialPanelSpot="Center"
             InitialDiagramBoundsSpot="Center"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
-            AllowDrop="True"
-            NodeTemplate="{StaticResource MyNodeTemplate}" />
+            NodeTemplate="{StaticResource MyNodeTemplate}">
+        </go:Diagram>
     </Grid>
 </Window>

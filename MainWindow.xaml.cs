@@ -6,9 +6,7 @@ namespace GoXam
     {
         private static readonly MyNode StartNode = new MyNode {Key = "Start"};
         private static readonly MyNode EndNode = new MyNode {Key = "End"};
-        private static readonly MyLink StartToEndLink = new MyLink {From = StartNode.Key, To = EndNode.Key};
-        private readonly ObservableCollection<MyLink> _links = new ObservableCollection<MyLink> {StartToEndLink};
-        private readonly ObservableCollection<MyNode> _nodes = new ObservableCollection<MyNode> {StartNode, EndNode};
+        private readonly ObservableCollection<MyNode> _initialNodes = new ObservableCollection<MyNode> {StartNode, EndNode};
 
         public MainWindow()
         {
@@ -16,14 +14,14 @@ namespace GoXam
 
             MyDiagram.Model = new MyModel
             {
-                NodesSource = _nodes,
-                LinksSource = _links,
+                NodesSource = new ObservableCollection<MyNode>(),
+                LinksSource = new ObservableCollection<MyLink>(),
                 Modifiable = true
             };
 
             MyPalette.Model = new MyModel
             {
-                NodesSource = _nodes
+                NodesSource = _initialNodes
             };
         }
     }
