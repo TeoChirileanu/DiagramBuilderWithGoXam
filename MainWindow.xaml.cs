@@ -7,9 +7,8 @@ namespace GoXam
         private static readonly MyNode StartNode = new MyNode {Key = "Start"};
         private static readonly MyNode EndNode = new MyNode {Key = "End"};
         private static readonly MyLink StartToEndLink = new MyLink {From = StartNode.Key, To = EndNode.Key};
-
-        private readonly ObservableCollection<MyNode> _nodes = new ObservableCollection<MyNode>{StartNode, EndNode};
         private readonly ObservableCollection<MyLink> _links = new ObservableCollection<MyLink> {StartToEndLink};
+        private readonly ObservableCollection<MyNode> _nodes = new ObservableCollection<MyNode> {StartNode, EndNode};
 
         public MainWindow()
         {

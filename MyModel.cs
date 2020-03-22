@@ -2,5 +2,7 @@
 
 namespace GoXam
 {
-    public class MyModel : GraphLinksModel<MyNode, string, string, MyLink> { }
+    public class MyModel : GraphLinksModel<MyNode, string, string, MyLink>
+    {
+    }
 }
