@@ -3,11 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GoXam"
         xmlns:go="http://schemas.nwoods.com/GoXam"
+        xmlns:goXam="clr-namespace:GoXam"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <FrameworkElement.Resources>
+        <DataTemplate x:Key="MyNodeTemplate">
+            <Border 
+                BorderBrush="Black" 
+                BorderThickness="1" 
+                Padding="3" 
+                CornerRadius="3"
+                Background="AntiqueWhite"
+                go:Part.SelectionAdorned="True"
+                go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}">
+                <TextBlock Text="{Binding Path=Data.Key}"/>
+            </Border>
+        </DataTemplate>
+    </FrameworkElement.Resources>
+    
     <Grid>
-
+        <go:Diagram 
+            x:Name="MyDiagram"
+            Padding="10"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            NodeTemplate="{StaticResource MyNodeTemplate}"/>
     </Grid>
 </Window>
