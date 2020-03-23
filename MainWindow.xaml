@@ -12,12 +12,10 @@
             <StackPanel 
                 go:Node.LocationElementName="Icon"
                 go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}"
-                go:Node.LocationSpot="Center"
-                go:Part.SelectionAdorned="True">
+                go:Node.LocationSpot="Center">
                 <TextBlock Text="{Binding Path=Data.Key, Mode=TwoWay}"
-                           HorizontalAlignment="Center"
-                           go:Part.TextEditable="True"/>
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                           HorizontalAlignment="Center"/>
+                <Grid>
                     <Ellipse Fill="Brown"
                              Width="30" Height="30"
                              go:Node.PortId=""
@@ -29,12 +27,13 @@
                 </Grid>
             </StackPanel>
         </DataTemplate>
+
         <DataTemplate x:Key="MyLinkTemplate">
             <go:LinkPanel go:Part.SelectionElementName="Path" go:Part.SelectionAdorned="True">
                 <go:LinkShape 
-                    Stroke="Black" StrokeThickness="2"
+                    Stroke="Black" StrokeThickness="1"
                     x:Name="Path" go:LinkPanel.IsLinkShape="True"/>
-                <Path Fill="DarkRed" go:LinkPanel.ToArrow="Standard"/>
+                <Path Fill="Black" go:LinkPanel.ToArrow="Standard"/>
             </go:LinkPanel>
         </DataTemplate>
     </FrameworkElement.Resources>
@@ -59,5 +58,11 @@
             NodeTemplate="{StaticResource MyNodeTemplate}"
             LinkTemplate="{StaticResource MyLinkTemplate}">
         </go:Diagram>
+
+        <ContextMenuService.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Save" Click="Save"/>
+            </ContextMenu>
+        </ContextMenuService.ContextMenu>
     </Grid>
 </Window>
