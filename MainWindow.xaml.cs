@@ -9,12 +9,6 @@ namespace GoXam
 {
     public partial class MainWindow
     {
-        private static readonly MyNode StartNode = new MyNode {Key = "Start"};
-        private static readonly MyNode EndNode = new MyNode {Key = "End"};
-
-        private readonly ObservableCollection<MyNode> _initialNodes = new ObservableCollection<MyNode>
-            {StartNode, EndNode};
-
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +22,11 @@ namespace GoXam
 
             MyPalette.Model = new MyModel
             {
-                NodesSource = _initialNodes
+                NodesSource = new ObservableCollection<MyNode>
+                {
+                    new MyNode {Key = "Start"}, 
+                    new MyNode {Key = "End"}
+                }
             };
         }
 
