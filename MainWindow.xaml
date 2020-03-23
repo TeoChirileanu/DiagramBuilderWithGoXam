@@ -9,17 +9,23 @@
 
     <FrameworkElement.Resources>
         <DataTemplate x:Key="MyNodeTemplate">
-            <StackPanel go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}">
+            <StackPanel 
+                go:Node.LocationElementName="Icon"
+                go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}"
+                go:Node.LocationSpot="Center"
+                go:Part.SelectionAdorned="True">
                 <TextBlock Text="{Binding Path=Data.Key, Mode=TwoWay}"
                            HorizontalAlignment="Center"
                            go:Part.TextEditable="True"/>
-                <Grid HorizontalAlignment="Center">
-                    <Rectangle Fill="Brown"
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Ellipse Fill="Brown"
                              Width="30" Height="30"
                              go:Node.PortId=""
                              go:Node.LinkableFrom="True" 
                              go:Node.LinkableTo="True"
                              Cursor="Hand" />
+                    <Ellipse Fill="Transparent"
+                             Width="20" Height="20"/>
                 </Grid>
             </StackPanel>
         </DataTemplate>
@@ -28,7 +34,7 @@
                 <go:LinkShape 
                     Stroke="Black" StrokeThickness="2"
                     x:Name="Path" go:LinkPanel.IsLinkShape="True"/>
-                <Path Fill="Black" go:LinkPanel.ToArrow="Standard"/>
+                <Path Fill="DarkRed" go:LinkPanel.ToArrow="Standard"/>
             </go:LinkPanel>
         </DataTemplate>
     </FrameworkElement.Resources>
