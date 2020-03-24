@@ -4,15 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:go="http://schemas.nwoods.com/GoXam"
+        xmlns:goXam="clr-namespace:GoXam"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1600">
 
     <FrameworkElement.Resources>
         <DataTemplate x:Key="MyNodeTemplate">
             <StackPanel 
                 go:Node.LocationElementName="Icon"
                 go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}"
-                go:Node.LocationSpot="Center">
+                go:Node.LocationSpot="Center" d:DataContext="{d:DesignData }">
                 <TextBlock Text="{Binding Path=Data.Key, Mode=TwoWay}"
                            HorizontalAlignment="Center"/>
                 <Grid>
@@ -23,7 +24,7 @@
                              go:Node.LinkableTo="True"
                              Cursor="Hand" />
                     <Ellipse Fill="Transparent"
-                             Width="20" Height="20"/>
+                             Width="25" Height="25"/>
                 </Grid>
             </StackPanel>
         </DataTemplate>
@@ -41,22 +42,40 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
         <go:Palette Grid.Row="0" Grid.Column="0" x:Name="MyPalette"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Top"
-            NodeTemplate="{StaticResource MyNodeTemplate}">
-        </go:Palette>
+            NodeTemplate="{StaticResource MyNodeTemplate}"/>
 
-        <go:Diagram Grid.Row="0" Grid.Column="1" x:Name="MyDiagram" AllowDrop="True"
-            InitialPanelSpot="Center"
-            InitialDiagramBoundsSpot="Center"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch"
-            NodeTemplate="{StaticResource MyNodeTemplate}"
-            LinkTemplate="{StaticResource MyLinkTemplate}">
+        <go:Diagram Grid.Row="0" Grid.Column="1" 
+                    x:Name="MyDiagram" 
+                    AllowDrop="True"
+                    InitialPanelSpot="Center"
+                    InitialDiagramBoundsSpot="Center"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    NodeTemplate="{StaticResource MyNodeTemplate}"
+                    LinkTemplate="{StaticResource MyLinkTemplate}">
+
+            <go:Diagram.ClickCreatingTool>
+                <go:ClickCreatingTool DoubleClick="True">
+                    <go:ClickCreatingTool.PrototypeData>
+                        <goXam:MyNode/>
+                    </go:ClickCreatingTool.PrototypeData>
+                </go:ClickCreatingTool>
+            </go:Diagram.ClickCreatingTool>
+
+            <go:Diagram.CommandHandler>
+                <go:CommandHandler>
+                    <go:CommandHandler.PrototypeGroup>
+                        <goXam:MyNode IsSubGraph="True"/>
+                    </go:CommandHandler.PrototypeGroup>
+                </go:CommandHandler>
+            </go:Diagram.CommandHandler>
+
         </go:Diagram>
 
         <ContextMenuService.ContextMenu>
