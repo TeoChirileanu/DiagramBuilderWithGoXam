@@ -10,60 +10,88 @@
 
     <FrameworkElement.Resources>
         <DataTemplate x:Key="MyNodeTemplate">
-            <StackPanel 
-                go:Node.LocationElementName="Icon"
+            <go:NodePanel
                 go:Node.Location="{Binding Path=Data.Location, Mode=TwoWay}"
-                go:Node.LocationSpot="Center" d:DataContext="{d:DesignData }">
-                <TextBlock Text="{Binding Path=Data.Key, Mode=TwoWay}"
-                           HorizontalAlignment="Center"/>
-                <Grid>
-                    <Ellipse Fill="Brown"
-                             Width="30" Height="30"
-                             go:Node.PortId=""
-                             go:Node.LinkableFrom="True" 
-                             go:Node.LinkableTo="True"
-                             Cursor="Hand" />
-                    <Ellipse Fill="Transparent"
-                             Width="25" Height="25"/>
-                </Grid>
-            </StackPanel>
+                go:Node.SelectionAdorned="True"
+                d:DataContext="{d:DesignData }">
+
+                <go:NodeShape
+                    go:NodePanel.Figure="Circle"
+                    Width="30"
+                    Height="30"
+                    Stroke="Black"
+                    go:Node.LinkableFrom="True"
+                    go:Node.LinkableTo="True"
+                    Cursor="Hand" />
+
+                <TextBlock
+                    Text="{Binding Path=Data.Key, Mode=TwoWay}"
+                    FontSize="25"
+                    TextWrapping="Wrap"
+                    go:Part.TextEditable="True"
+                    d:DataContext="{d:DesignData }"
+                    TextAlignment="Center"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
+
+            </go:NodePanel>
         </DataTemplate>
 
         <DataTemplate x:Key="MyLinkTemplate">
             <go:LinkPanel go:Part.SelectionElementName="Path" go:Part.SelectionAdorned="True">
-                <go:LinkShape 
-                    Stroke="Black" StrokeThickness="1"
-                    x:Name="Path" go:LinkPanel.IsLinkShape="True"/>
-                <Path Fill="Black" go:LinkPanel.ToArrow="Standard"/>
+
+                <go:LinkShape
+                    Stroke="Black"
+                    x:Name="Path"
+                    go:LinkPanel.IsLinkShape="True" />
+
+                <Path
+                    Fill="Black"
+                    go:LinkPanel.ToArrow="Standard" />
+
             </go:LinkPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MyGroupTemplate">
+            <StackPanel go:Node.LocationElementName="myGroupPanel">
+
+                <TextBlock
+                    Text="{Binding Path=Data.Key, Mode=TwoWay}"
+                    go:Part.TextEditable="True"
+                    d:DataContext="{d:DesignData }"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center" />
+
+                <Border
+                    CornerRadius="5"
+                    BorderBrush="DarkRed"
+                    BorderThickness="1">
+                    <go:GroupPanel
+                        x:Name="myGroupPanel"
+                        Padding="5" />
+                </Border>
+
+            </StackPanel>
         </DataTemplate>
     </FrameworkElement.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
-
-        <go:Palette Grid.Row="0" Grid.Column="0" x:Name="MyPalette"
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Top"
-            NodeTemplate="{StaticResource MyNodeTemplate}"/>
-
-        <go:Diagram Grid.Row="0" Grid.Column="1" 
-                    x:Name="MyDiagram" 
-                    AllowDrop="True"
-                    InitialPanelSpot="Center"
-                    InitialDiagramBoundsSpot="Center"
-                    HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    NodeTemplate="{StaticResource MyNodeTemplate}"
-                    LinkTemplate="{StaticResource MyLinkTemplate}">
+        <go:Diagram
+            x:Name="MyDiagram"
+            AllowDrop="True"
+            InitialPanelSpot="Center"
+            InitialDiagramBoundsSpot="Center"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            NodeTemplate="{StaticResource MyNodeTemplate}"
+            LinkTemplate="{StaticResource MyLinkTemplate}"
+            GroupTemplate="{StaticResource MyGroupTemplate}">
 
             <go:Diagram.ClickCreatingTool>
                 <go:ClickCreatingTool DoubleClick="True">
                     <go:ClickCreatingTool.PrototypeData>
-                        <goXam:MyNode/>
+                        <goXam:MyNode />
                     </go:ClickCreatingTool.PrototypeData>
                 </go:ClickCreatingTool>
             </go:Diagram.ClickCreatingTool>
@@ -71,7 +99,7 @@
             <go:Diagram.CommandHandler>
                 <go:CommandHandler>
                     <go:CommandHandler.PrototypeGroup>
-                        <goXam:MyNode IsSubGraph="True"/>
+                        <goXam:MyNode IsSubGraph="True" />
                     </go:CommandHandler.PrototypeGroup>
                 </go:CommandHandler>
             </go:Diagram.CommandHandler>
@@ -80,7 +108,7 @@
 
         <ContextMenuService.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="Save" Click="Save"/>
+                <MenuItem Header="Save" Click="Save" />
             </ContextMenu>
         </ContextMenuService.ContextMenu>
     </Grid>
