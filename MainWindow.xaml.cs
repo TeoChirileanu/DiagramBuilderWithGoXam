@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Xml;
 using Newtonsoft.Json;
-using Northwoods.GoXam.Layout;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace GoXam
@@ -19,7 +18,8 @@ namespace GoXam
                 LinksSource = new ObservableCollection<MyLink>(),
                 Modifiable = true,
                 NodeIsGroupPath = "IsSubGraph",
-                GroupNodePath = "SubGraphKey"
+                GroupNodePath = "SubGraphKey",
+                HasUndoManager = true
             };
         }
 
